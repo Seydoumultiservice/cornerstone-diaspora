@@ -2,15 +2,25 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
+// Define the currency type for better type safety
+type CurrencyCode = 'EUR' | 'USD' | 'XOF';
+
+// Define the rates structure type
+type RatesType = {
+  [key in CurrencyCode]: {
+    [key in CurrencyCode]: number;
+  };
+};
+
 const CurrencyConverter: React.FC = () => {
   const { t } = useLanguage();
   const [amount, setAmount] = useState('');
-  const [fromCurrency, setFromCurrency] = useState('EUR');
-  const [toCurrency, setToCurrency] = useState('XOF');
+  const [fromCurrency, setFromCurrency] = useState<CurrencyCode>('EUR');
+  const [toCurrency, setToCurrency] = useState<CurrencyCode>('XOF');
   const [result, setResult] = useState<string | null>(null);
 
   // Simplified conversion rates (as of April 2023)
-  const rates = {
+  const rates: RatesType = {
     EUR: { XOF: 655.957, USD: 1.08, EUR: 1 },
     USD: { XOF: 607.37, EUR: 0.93, USD: 1 },
     XOF: { EUR: 0.00152, USD: 0.00165, XOF: 1 }
@@ -21,7 +31,7 @@ const CurrencyConverter: React.FC = () => {
       return;
     }
 
-    const conversion = rates[fromCurrency as keyof typeof rates][toCurrency as keyof typeof rates[typeof fromCurrency]];
+    const conversion = rates[fromCurrency][toCurrency];
     const convertedAmount = (Number(amount) * conversion).toFixed(2);
     setResult(`${amount} ${fromCurrency} = ${convertedAmount} ${toCurrency}`);
   };
@@ -49,7 +59,7 @@ const CurrencyConverter: React.FC = () => {
                 <label className="block mb-2 font-medium">{t('from')}</label>
                 <select
                   value={fromCurrency}
-                  onChange={(e) => setFromCurrency(e.target.value)}
+                  onChange={(e) => setFromCurrency(e.target.value as CurrencyCode)}
                   className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cornerstone-gold"
                 >
                   <option value="EUR">EUR (€)</option>
@@ -62,7 +72,7 @@ const CurrencyConverter: React.FC = () => {
                 <label className="block mb-2 font-medium">{t('to')}</label>
                 <select
                   value={toCurrency}
-                  onChange={(e) => setToCurrency(e.target.value)}
+                  onChange={(e) => setToCurrency(e.target.value as CurrencyCode)}
                   className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cornerstone-gold"
                 >
                   <option value="XOF">XOF (FCFA)</option>
