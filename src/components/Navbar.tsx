@@ -1,7 +1,7 @@
-
 import React, { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { Menu } from 'lucide-react';
+import Flags from './Flags';
 
 const Navbar: React.FC = () => {
   const { language, setLanguage, t } = useLanguage();
@@ -14,10 +14,11 @@ const Navbar: React.FC = () => {
   return (
     <header className="bg-cornerstone-black py-4 sticky top-0 z-50 border-b border-cornerstone-gold/30">
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <div className="flex items-center">
+        <div className="flex items-center gap-4">
           <a href="/" className="text-white text-2xl font-playfair font-bold">
             <span className="text-cornerstone-gold">Cornerstone</span> Briques
           </a>
+          <Flags />
         </div>
 
         {/* Desktop Menu */}
