@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -65,8 +64,8 @@ export default {
 				},
 				cornerstone: {
 					black: '#000000',
-					gold: '#FFD700',
-					navy: '#0F056B',
+					orange: '#F97316',
+					white: '#ffffff',
 				}
 			},
 			fontFamily: {

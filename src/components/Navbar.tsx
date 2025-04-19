@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { Menu } from 'lucide-react';
@@ -12,38 +13,38 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="bg-cornerstone-black py-4 sticky top-0 z-50 border-b border-cornerstone-gold/30">
+    <header className="bg-cornerstone-black py-4 sticky top-0 z-50 border-b border-cornerstone-orange/30">
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center gap-4">
           <a href="/" className="text-white text-2xl font-playfair font-bold">
-            <span className="text-cornerstone-gold">Cornerstone</span> Briques
+            <span className="text-cornerstone-orange">Cornerstone</span> Briques
           </a>
           <Flags />
         </div>
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center space-x-8">
-          <a href="#" className="text-white hover:text-cornerstone-gold transition-colors">
+          <a href="#" className="text-white hover:text-cornerstone-orange transition-colors">
             {t('home')}
           </a>
-          <a href="#services" className="text-white hover:text-cornerstone-gold transition-colors">
+          <a href="#services" className="text-white hover:text-cornerstone-orange transition-colors">
             {t('services')}
           </a>
-          <a href="#faq" className="text-white hover:text-cornerstone-gold transition-colors">
+          <a href="#faq" className="text-white hover:text-cornerstone-orange transition-colors">
             {t('faq')}
           </a>
-          <a href="#contact" className="text-white hover:text-cornerstone-gold transition-colors">
+          <a href="#contact" className="text-white hover:text-cornerstone-orange transition-colors">
             {t('contact')}
           </a>
           
           <button
             onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
-            className="px-3 py-1 bg-cornerstone-navy text-white rounded-md hover:bg-opacity-80 transition-colors"
+            className="px-3 py-1 bg-white text-cornerstone-black rounded-md hover:bg-opacity-80 transition-colors"
           >
             {language === 'fr' ? 'EN' : 'FR'}
           </button>
           
-          <button className="btn-primary">
+          <button className="bg-cornerstone-orange text-white px-6 py-2 rounded-lg hover:bg-opacity-90 transition-colors">
             {t('estimateProject')}
           </button>
         </nav>
@@ -52,7 +53,7 @@ const Navbar: React.FC = () => {
         <div className="flex md:hidden items-center space-x-4">
           <button
             onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
-            className="px-3 py-1 bg-cornerstone-navy text-white rounded-md hover:bg-opacity-80 transition-colors"
+            className="px-3 py-1 bg-white text-cornerstone-black rounded-md hover:bg-opacity-80 transition-colors"
           >
             {language === 'fr' ? 'EN' : 'FR'}
           </button>
@@ -65,21 +66,21 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu Dropdown */}
       {isMenuOpen && (
-        <div className="md:hidden bg-cornerstone-black border-t border-cornerstone-gold/20 animate-slide-up">
+        <div className="md:hidden bg-cornerstone-black border-t border-cornerstone-orange/20 animate-slide-up">
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-            <a href="#" className="text-white hover:text-cornerstone-gold transition-colors py-2">
+            <a href="#" className="text-white hover:text-cornerstone-orange transition-colors py-2">
               {t('home')}
             </a>
-            <a href="#services" className="text-white hover:text-cornerstone-gold transition-colors py-2">
+            <a href="#services" className="text-white hover:text-cornerstone-orange transition-colors py-2">
               {t('services')}
             </a>
-            <a href="#faq" className="text-white hover:text-cornerstone-gold transition-colors py-2">
+            <a href="#faq" className="text-white hover:text-cornerstone-orange transition-colors py-2">
               {t('faq')}
             </a>
-            <a href="#contact" className="text-white hover:text-cornerstone-gold transition-colors py-2">
+            <a href="#contact" className="text-white hover:text-cornerstone-orange transition-colors py-2">
               {t('contact')}
             </a>
-            <button className="btn-primary w-full">
+            <button className="bg-cornerstone-orange text-white px-6 py-2 rounded-lg hover:bg-opacity-90 transition-colors w-full">
               {t('estimateProject')}
             </button>
           </div>
