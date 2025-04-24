@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap');
 
 @tailwind base;
@@ -99,7 +98,7 @@
   }
 
   body {
-    @apply bg-background text-foreground font-lato;
+    @apply bg-cornerstone-white text-foreground font-lato;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -109,15 +108,15 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-cornerstone-orange text-cornerstone-black font-bold py-3 px-6 rounded-md transition-all hover:bg-opacity-80;
+    @apply bg-cornerstone-red text-cornerstone-white font-bold py-3 px-6 rounded-md transition-all hover:bg-opacity-80;
   }
   
   .btn-secondary {
-    @apply bg-cornerstone-navy text-white font-bold py-3 px-6 rounded-md transition-all hover:bg-opacity-80;
+    @apply bg-cornerstone-orange text-cornerstone-white font-bold py-3 px-6 rounded-md transition-all hover:bg-opacity-80;
   }
   
   .section-title {
-    @apply text-3xl md:text-4xl font-bold mb-6 font-playfair;
+    @apply text-3xl md:text-4xl font-bold mb-6 font-playfair text-cornerstone-red;
   }
   
   .section-subtitle {

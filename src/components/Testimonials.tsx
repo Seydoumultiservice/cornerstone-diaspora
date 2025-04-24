@@ -1,13 +1,14 @@
 
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { Star } from 'lucide-react';
 
 const Testimonials: React.FC = () => {
   const { t, language } = useLanguage();
   
   const testimonials = [
     {
-      name: 'Jean Dupont',
+      name: 'Brice Koumessi',
       location: language === 'fr' ? 'Paris, France' : 'Paris, France',
       text: language === 'fr' 
         ? "J'ai pu acheter des briques pour ma maison à Lomé tout en étant à Paris. Le suivi en temps réel est fantastique."
@@ -30,10 +31,10 @@ const Testimonials: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 bg-cornerstone-navy text-white">
+    <section className="py-20 bg-cornerstone-brown text-cornerstone-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="section-title text-white">{t('testimonials')}</h2>
+          <h2 className="section-title text-cornerstone-white">{t('testimonials')}</h2>
           <p className="section-subtitle text-gray-300">{t('testimonialsSubtitle')}</p>
         </div>
         
@@ -41,15 +42,22 @@ const Testimonials: React.FC = () => {
           {testimonials.map((testimonial, index) => (
             <div 
               key={index} 
-              className="bg-white/5 backdrop-blur-sm p-6 rounded-lg border border-white/10 hover:border-cornerstone-gold/30 transition-colors"
+              className="bg-cornerstone-white/5 backdrop-blur-sm p-6 rounded-lg border border-cornerstone-white/10 hover:border-cornerstone-orange/30 transition-colors"
             >
               <p className="text-gray-200 mb-6 italic">"{testimonial.text}"</p>
               <div>
-                <p className="font-bold text-cornerstone-gold">{testimonial.name}</p>
+                <p className="font-bold text-cornerstone-orange">{testimonial.name}</p>
                 <p className="text-gray-300">{testimonial.location}</p>
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="flex justify-center mt-12">
+          <button className="bg-cornerstone-orange text-cornerstone-white px-6 py-3 rounded-lg flex items-center space-x-2 hover:bg-opacity-90 transition-colors">
+            <Star className="w-5 h-5" />
+            <span>{language === 'fr' ? 'Laissez un avis' : 'Leave a review'}</span>
+          </button>
         </div>
       </div>
     </section>

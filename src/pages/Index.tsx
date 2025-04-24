@@ -9,6 +9,7 @@ import Testimonials from '../components/Testimonials';
 import FAQ from '../components/FAQ';
 import ContactForm from '../components/ContactForm';
 import Footer from '../components/Footer';
+import ProjectEstimation from '../components/ProjectEstimation';
 
 const Index: React.FC = () => {
   return (
@@ -18,6 +19,7 @@ const Index: React.FC = () => {
         <main className="flex-grow">
           <Hero />
           <Services />
+          <ProjectEstimation />
           <CurrencyConverter />
           <Testimonials />
           <FAQ />
