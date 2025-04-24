@@ -66,6 +66,8 @@ export default {
 					black: '#000000',
 					orange: '#F97316',
 					white: '#ffffff',
+					gold: '#FFA500',
+					navy: '#000080'
 				}
 			},
 			fontFamily: {
