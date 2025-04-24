@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Star } from 'lucide-react';
+import { Star, User, Mail, Phone, Flag } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -11,10 +11,15 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useLanguage } from '../context/LanguageContext';
 
 type ReviewFormData = {
+  firstName: string;
+  email: string;
+  phone: string;
+  country: string;
   review: string;
 };
 
@@ -47,6 +52,74 @@ const ReviewDialog: React.FC<ReviewDialogProps> = ({ open, onClose }) => {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
               control={form.control}
+              name="firstName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="flex items-center gap-2">
+                    <User className="w-4 h-4" />
+                    {language === 'fr' ? 'Prénom' : 'First Name'}
+                  </FormLabel>
+                  <FormControl>
+                    <Input required {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="flex items-center gap-2">
+                    <Mail className="w-4 h-4" />
+                    {language === 'fr' ? 'Email' : 'Email'}
+                  </FormLabel>
+                  <FormControl>
+                    <Input type="email" required {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="flex items-center gap-2">
+                    <Phone className="w-4 h-4" />
+                    {language === 'fr' ? 'Téléphone' : 'Phone'}
+                  </FormLabel>
+                  <FormControl>
+                    <Input type="tel" required {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="country"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="flex items-center gap-2">
+                    <Flag className="w-4 h-4" />
+                    {language === 'fr' ? 'Pays' : 'Country'}
+                  </FormLabel>
+                  <FormControl>
+                    <Input required {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
               name="review"
               render={({ field }) => (
                 <FormItem>
@@ -57,6 +130,7 @@ const ReviewDialog: React.FC<ReviewDialogProps> = ({ open, onClose }) => {
                     <Textarea 
                       placeholder={language === 'fr' ? 'Partagez votre expérience...' : 'Share your experience...'}
                       className="min-h-[100px]" 
+                      required
                       {...field}
                     />
                   </FormControl>
