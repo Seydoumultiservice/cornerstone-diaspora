@@ -1,10 +1,12 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { Star } from 'lucide-react';
+import ReviewDialog from './ReviewDialog';
 
 const Testimonials: React.FC = () => {
   const { t, language } = useLanguage();
+  const [isReviewDialogOpen, setIsReviewDialogOpen] = useState(false);
   
   const testimonials = [
     {
@@ -54,12 +56,20 @@ const Testimonials: React.FC = () => {
         </div>
 
         <div className="flex justify-center mt-12">
-          <button className="bg-cornerstone-orange text-cornerstone-white px-6 py-3 rounded-lg flex items-center space-x-2 hover:bg-opacity-90 transition-colors">
+          <button 
+            className="bg-cornerstone-orange text-cornerstone-white px-6 py-3 rounded-lg flex items-center space-x-2 hover:bg-opacity-90 transition-colors"
+            onClick={() => setIsReviewDialogOpen(true)}
+          >
             <Star className="w-5 h-5" />
             <span>{language === 'fr' ? 'Laissez un avis' : 'Leave a review'}</span>
           </button>
         </div>
       </div>
+
+      <ReviewDialog 
+        open={isReviewDialogOpen} 
+        onClose={() => setIsReviewDialogOpen(false)} 
+      />
     </section>
   );
 };
