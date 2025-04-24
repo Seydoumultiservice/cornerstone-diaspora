@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import Services from '../components/Services';
 import CurrencyConverter from '../components/CurrencyConverter';
+import History from '../components/History';
 import Testimonials from '../components/Testimonials';
 import FAQ from '../components/FAQ';
 import ContactForm from '../components/ContactForm';
@@ -24,6 +25,9 @@ const Index: React.FC = () => {
           </Element>
           <Element name="services">
             <Services />
+          </Element>
+          <Element name="history">
+            <History />
           </Element>
           <Element name="estimate-project">
             <ProjectEstimation />
