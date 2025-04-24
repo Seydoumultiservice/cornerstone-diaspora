@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { history } from 'lucide-react';
+import { Clock } from 'lucide-react';  // Replace 'history' with an appropriate icon from lucide-react
 
 const History: React.FC = () => {
   return (
@@ -8,7 +8,7 @@ const History: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center mb-12">
           <div className="flex items-center justify-center mb-6">
-            <history className="w-10 h-10 text-cornerstone-red mr-3" />
+            <Clock className="w-10 h-10 text-cornerstone-red mr-3" />  {/* Changed from 'history' to 'Clock' */}
             <h2 className="section-title">Notre Histoire</h2>
           </div>
         </div>
