@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import ChatBot from "./components/ChatBot";
 import ExitIntentPopup from "./components/ExitIntentPopup";
+import { LanguageProvider } from "./context/LanguageContext";
 
 // Create QueryClient outside of component
 const queryClient = new QueryClient();
@@ -18,16 +19,18 @@ const App: React.FC = () => {
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-            <ChatBot />
-            <ExitIntentPopup />
-          </BrowserRouter>
+          <LanguageProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+              <ChatBot />
+              <ExitIntentPopup />
+            </BrowserRouter>
+          </LanguageProvider>
         </TooltipProvider>
       </QueryClientProvider>
     </React.StrictMode>
