@@ -1,9 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ShoppingCart, Clock } from 'lucide-react';
 import { Link as ScrollLink } from 'react-scroll';
 import Flags from './Flags';
+import { Button } from "@/components/ui/button";
 
 const Navbar: React.FC = () => {
   const { language, setLanguage, t } = useLanguage();
@@ -12,6 +13,10 @@ const Navbar: React.FC = () => {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleExternalLink = (url: string) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   useEffect(() => {
@@ -45,7 +50,7 @@ const Navbar: React.FC = () => {
         </div>
 
         {/* Desktop Menu */}
-        <nav className="hidden md:flex items-center space-x-8">
+        <nav className="hidden md:flex items-center space-x-6">
           <ScrollLink 
             to="home" 
             spy={true} 
@@ -94,6 +99,28 @@ const Navbar: React.FC = () => {
           >
             {t('contact')}
           </ScrollLink>
+          
+          <Button 
+            variant="ghost"
+            className="flex items-center gap-2 hover:text-cornerstone-red transition-colors"
+            onClick={() => handleExternalLink('https://cornerstonebrique.com/boutique')}
+          >
+            <ShoppingCart className="h-5 w-5" />
+            <span className={`${scrolled ? 'text-cornerstone-navy' : 'text-cornerstone-navy'}`}>
+              {language === 'fr' ? 'Commande en ligne' : 'Online Order'}
+            </span>
+          </Button>
+          
+          <Button 
+            variant="ghost"
+            className="flex items-center gap-2 hover:text-cornerstone-red transition-colors"
+            onClick={() => handleExternalLink('https://cornerstonebrique.com/suivi')}
+          >
+            <Clock className="h-5 w-5" />
+            <span className={`${scrolled ? 'text-cornerstone-navy' : 'text-cornerstone-navy'}`}>
+              {language === 'fr' ? 'Suivi en Temps Réel' : 'Real-time Tracking'}
+            </span>
+          </Button>
           
           <button
             onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
@@ -179,6 +206,22 @@ const Navbar: React.FC = () => {
             >
               {t('contact')}
             </ScrollLink>
+            
+            <button 
+              className="flex items-center gap-2 text-cornerstone-navy hover:text-cornerstone-red transition-colors py-2"
+              onClick={() => handleExternalLink('https://cornerstonebrique.com/boutique')}
+            >
+              <ShoppingCart className="h-5 w-5" />
+              <span>{language === 'fr' ? 'Commande en ligne' : 'Online Order'}</span>
+            </button>
+            
+            <button 
+              className="flex items-center gap-2 text-cornerstone-navy hover:text-cornerstone-red transition-colors py-2"
+              onClick={() => handleExternalLink('https://cornerstonebrique.com/suivi')}
+            >
+              <Clock className="h-5 w-5" />
+              <span>{language === 'fr' ? 'Suivi en Temps Réel' : 'Real-time Tracking'}</span>
+            </button>
             
             <ScrollLink 
               to="estimate-project" 

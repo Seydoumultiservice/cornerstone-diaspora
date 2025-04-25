@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import ChatBot from "./components/ChatBot";
+import ExitIntentPopup from "./components/ExitIntentPopup";
 
 // Create QueryClient outside of component
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ const App: React.FC = () => {
               <Route path="*" element={<NotFound />} />
             </Routes>
             <ChatBot />
+            <ExitIntentPopup />
           </BrowserRouter>
         </TooltipProvider>
       </QueryClientProvider>
