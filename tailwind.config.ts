@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -63,10 +64,12 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				cornerstone: {
-					marine: '#0033A0',    // Main color: Blue marine
-					gold: '#FFD700',      // Secondary color: Gold
-					lightgray: '#F1F1F1', // Accent/Background color: Light gray
-					white: '#FFFFFF'       // Accent/Background color: White
+					orange: '#F97316',    // Main color: Orange from logo
+					gray: '#808080',      // Secondary color: Gray
+					lightgray: '#F1F1F1', // Light gray for backgrounds
+					white: '#FFFFFF',     // White
+					marine: '#0033A0',    // Keeping this for backward compatibility
+					gold: '#FFD700'       // Keeping this for backward compatibility
 				}
 			},
 			fontFamily: {

@@ -6,19 +6,19 @@ import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from '../context/LanguageContext';
-import { X } from 'lucide-react';
+import { X, Mail } from 'lucide-react';
+import { useToast } from "@/components/ui/use-toast";
 
-type ExitIntentFormData = {
-  name: string;
+type NewsletterFormData = {
   email: string;
-  phone: string;
 };
 
 const ExitIntentPopup: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { language } = useLanguage();
   const [hasShown, setHasShown] = useState(false);
-  const form = useForm<ExitIntentFormData>();
+  const { toast } = useToast();
+  const form = useForm<NewsletterFormData>();
 
   useEffect(() => {
     if (hasShown) return;
@@ -52,9 +52,15 @@ const ExitIntentPopup: React.FC = () => {
     };
   }, [hasShown]);
 
-  const onSubmit = (data: ExitIntentFormData) => {
-    console.log('Exit intent form submitted:', data);
+  const onSubmit = (data: NewsletterFormData) => {
+    console.log('Newsletter subscription:', data);
     // Here you would typically send this data to your backend
+    toast({
+      title: language === 'fr' ? "Merci pour votre inscription !" : "Thank you for subscribing!",
+      description: language === 'fr' 
+        ? "Vous recevrez bientôt nos actualités et offres spéciales." 
+        : "You will soon receive our news and special offers.",
+    });
     setIsOpen(false);
   };
 
@@ -64,8 +70,8 @@ const ExitIntentPopup: React.FC = () => {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="sm:max-w-[500px] p-0 overflow-hidden rounded-xl">
-        <div className="bg-cornerstone-red text-white p-4">
+      <DialogContent className="sm:max-w-[450px] p-0 overflow-hidden rounded-xl">
+        <div className="bg-cornerstone-orange text-white p-4">
           <DialogHeader className="relative">
             <button 
               onClick={closeDialog}
@@ -73,44 +79,26 @@ const ExitIntentPopup: React.FC = () => {
             >
               <X size={24} />
             </button>
+            <div className="flex justify-center mb-3">
+              <Mail size={36} className="text-white" />
+            </div>
             <DialogTitle className="text-xl sm:text-2xl font-playfair font-bold text-center">
               {language === 'fr' 
-                ? 'Attendez ! Ne partez pas si vite !' 
-                : 'Wait! Don\'t leave so quickly!'}
+                ? 'Inscrivez-vous à notre newsletter pour ne rien rater' 
+                : 'Subscribe to our newsletter to stay updated'}
             </DialogTitle>
-            <p className="text-center mt-2">
-              {language === 'fr'
-                ? 'Laissez-nous vos coordonnées pour recevoir des offres exclusives et suivre votre projet de construction.'
-                : 'Leave us your contact information to receive exclusive offers and follow your construction project.'}
-            </p>
           </DialogHeader>
         </div>
 
-        <div className="p-6">
+        <div className="p-6 bg-white">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      {language === 'fr' ? 'Nom complet' : 'Full Name'}
-                    </FormLabel>
-                    <FormControl>
-                      <Input required placeholder={language === 'fr' ? 'Votre nom' : 'Your name'} {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
               <FormField
                 control={form.control}
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>
+                    <FormLabel className="text-cornerstone-gray">
                       {language === 'fr' ? 'Email' : 'Email'}
                     </FormLabel>
                     <FormControl>
@@ -119,27 +107,7 @@ const ExitIntentPopup: React.FC = () => {
                         required 
                         placeholder={language === 'fr' ? 'Votre email' : 'Your email'} 
                         {...field} 
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="phone"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      {language === 'fr' ? 'Téléphone' : 'Phone'}
-                    </FormLabel>
-                    <FormControl>
-                      <Input 
-                        type="tel" 
-                        required 
-                        placeholder={language === 'fr' ? 'Votre numéro' : 'Your number'} 
-                        {...field} 
+                        className="border-cornerstone-gray/30 focus:border-cornerstone-orange"
                       />
                     </FormControl>
                     <FormMessage />
@@ -148,11 +116,11 @@ const ExitIntentPopup: React.FC = () => {
               />
 
               <DialogFooter className="mt-6 flex gap-3">
-                <Button type="button" variant="outline" onClick={closeDialog} className="flex-1">
+                <Button type="button" variant="outline" onClick={closeDialog} className="flex-1 border-cornerstone-gray/30 text-cornerstone-gray hover:bg-cornerstone-gray/10">
                   {language === 'fr' ? 'Non merci' : 'No thanks'}
                 </Button>
-                <Button type="submit" className="bg-cornerstone-red hover:bg-cornerstone-red/90 text-white flex-1">
-                  {language === 'fr' ? 'Envoyer' : 'Submit'}
+                <Button type="submit" className="bg-cornerstone-orange hover:bg-cornerstone-orange/90 text-white flex-1">
+                  {language === 'fr' ? "S'inscrire" : "Subscribe"}
                 </Button>
               </DialogFooter>
             </form>
