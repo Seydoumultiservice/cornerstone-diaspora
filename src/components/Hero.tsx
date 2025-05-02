@@ -8,15 +8,15 @@ const Hero: React.FC = () => {
   const { t } = useLanguage();
 
   return (
-    <section className="relative bg-gradient-to-br from-cornerstone-beige to-white py-16 md:py-24 overflow-hidden">
+    <section className="relative bg-gradient-to-br from-cornerstone-lightgray to-cornerstone-white py-16 md:py-24 overflow-hidden">
       {/* Decorative elements */}
-      <div className="absolute top-0 left-0 w-1/3 h-2 bg-cornerstone-red"></div>
-      <div className="absolute bottom-0 right-0 w-1/3 h-2 bg-cornerstone-orange"></div>
+      <div className="absolute top-0 left-0 w-1/3 h-2 bg-cornerstone-marine"></div>
+      <div className="absolute bottom-0 right-0 w-1/3 h-2 bg-cornerstone-gold"></div>
       
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <div className="flex flex-col order-2 lg:order-1 text-left animate-fade-in">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-playfair text-cornerstone-navy">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-playfair text-cornerstone-marine">
               {t('heroTitle')}
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-gray-700 animate-slide-up" style={{ animationDelay: '0.2s' }}>
@@ -29,12 +29,12 @@ const Hero: React.FC = () => {
                 smooth={true} 
                 offset={-70} 
                 duration={500}
-                className="bg-cornerstone-red hover:bg-cornerstone-red/90 text-white px-6 py-3 rounded-lg flex items-center justify-center space-x-2 group transition-all cursor-pointer transform hover:scale-105"
+                className="bg-cornerstone-marine hover:bg-cornerstone-marine/90 text-cornerstone-white px-6 py-3 rounded-lg flex items-center justify-center space-x-2 group transition-all cursor-pointer transform hover:scale-105"
               >
                 <span>{t('estimateProject')}</span>
                 <ArrowDown className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
               </ScrollLink>
-              <button className="border-2 border-cornerstone-orange bg-white hover:bg-cornerstone-orange/10 text-cornerstone-navy px-6 py-3 rounded-lg transition-all transform hover:scale-105">
+              <button className="border-2 border-cornerstone-gold bg-white hover:bg-cornerstone-gold/10 text-cornerstone-marine px-6 py-3 rounded-lg transition-all transform hover:scale-105">
                 {t('learnMore')}
               </button>
             </div>

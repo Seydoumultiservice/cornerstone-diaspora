@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import ChatBot from "./components/ChatBot";
 import ExitIntentPopup from "./components/ExitIntentPopup";
+import OrderTracking from "./pages/OrderTracking";
 import { LanguageProvider } from "./context/LanguageContext";
 
 // Create QueryClient outside of component
@@ -25,6 +26,7 @@ const App: React.FC = () => {
             <BrowserRouter>
               <Routes>
                 <Route path="/" element={<Index />} />
+                <Route path="/order-tracking" element={<OrderTracking />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
               <ChatBot />

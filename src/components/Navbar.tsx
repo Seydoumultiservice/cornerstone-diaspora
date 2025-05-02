@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { Menu, X, ShoppingCart, Clock } from 'lucide-react';
 import { Link as ScrollLink } from 'react-scroll';
+import { Link } from 'react-router-dom';
 import Flags from './Flags';
 import { Button } from "@/components/ui/button";
 
@@ -36,15 +37,15 @@ const Navbar: React.FC = () => {
   return (
     <header className={`py-4 sticky top-0 z-50 transition-all duration-300 ${
       scrolled 
-        ? 'bg-white shadow-md border-b border-cornerstone-red/30' 
+        ? 'bg-cornerstone-white shadow-md border-b border-cornerstone-marine/30' 
         : 'bg-transparent'
     }`}>
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center gap-4">
           <a href="/" className={`text-2xl font-playfair font-bold transition-colors ${
-            scrolled ? 'text-cornerstone-navy' : 'text-cornerstone-navy'
+            scrolled ? 'text-cornerstone-marine' : 'text-cornerstone-marine'
           }`}>
-            <span className="text-cornerstone-red">Cornerstone</span> Briques
+            <span className="text-cornerstone-marine">Cornerstone</span> Briques
           </a>
           <Flags />
         </div>
@@ -57,8 +58,8 @@ const Navbar: React.FC = () => {
             smooth={true} 
             offset={-70} 
             duration={500}
-            className={`hover:text-cornerstone-red transition-colors cursor-pointer ${
-              scrolled ? 'text-cornerstone-navy' : 'text-cornerstone-navy'
+            className={`hover:text-cornerstone-gold transition-colors cursor-pointer ${
+              scrolled ? 'text-cornerstone-marine' : 'text-cornerstone-marine'
             }`}
           >
             {t('home')}
@@ -69,8 +70,8 @@ const Navbar: React.FC = () => {
             smooth={true} 
             offset={-70} 
             duration={500}
-            className={`hover:text-cornerstone-red transition-colors cursor-pointer ${
-              scrolled ? 'text-cornerstone-navy' : 'text-cornerstone-navy'
+            className={`hover:text-cornerstone-gold transition-colors cursor-pointer ${
+              scrolled ? 'text-cornerstone-marine' : 'text-cornerstone-marine'
             }`}
           >
             {t('services')}
@@ -81,8 +82,8 @@ const Navbar: React.FC = () => {
             smooth={true} 
             offset={-70} 
             duration={500}
-            className={`hover:text-cornerstone-red transition-colors cursor-pointer ${
-              scrolled ? 'text-cornerstone-navy' : 'text-cornerstone-navy'
+            className={`hover:text-cornerstone-gold transition-colors cursor-pointer ${
+              scrolled ? 'text-cornerstone-marine' : 'text-cornerstone-marine'
             }`}
           >
             {t('faq')}
@@ -93,8 +94,8 @@ const Navbar: React.FC = () => {
             smooth={true} 
             offset={-70} 
             duration={500}
-            className={`hover:text-cornerstone-red transition-colors cursor-pointer ${
-              scrolled ? 'text-cornerstone-navy' : 'text-cornerstone-navy'
+            className={`hover:text-cornerstone-gold transition-colors cursor-pointer ${
+              scrolled ? 'text-cornerstone-marine' : 'text-cornerstone-marine'
             }`}
           >
             {t('contact')}
@@ -102,29 +103,30 @@ const Navbar: React.FC = () => {
           
           <Button 
             variant="ghost"
-            className="flex items-center gap-2 hover:text-cornerstone-red transition-colors"
-            onClick={() => handleExternalLink('https://cornerstonebrique.com/boutique')}
+            className="flex items-center gap-2 hover:text-cornerstone-gold transition-colors"
+            onClick={() => handleExternalLink('https://www.cornerstonebrique.com/services')}
           >
             <ShoppingCart className="h-5 w-5" />
-            <span className={`${scrolled ? 'text-cornerstone-navy' : 'text-cornerstone-navy'}`}>
-              {language === 'fr' ? 'Commande en ligne' : 'Online Order'}
+            <span className={`${scrolled ? 'text-cornerstone-marine' : 'text-cornerstone-marine'}`}>
+              {language === 'fr' ? 'Commander' : 'Order'}
             </span>
           </Button>
           
-          <Button 
-            variant="ghost"
-            className="flex items-center gap-2 hover:text-cornerstone-red transition-colors"
-            onClick={() => handleExternalLink('https://cornerstonebrique.com/suivi')}
-          >
-            <Clock className="h-5 w-5" />
-            <span className={`${scrolled ? 'text-cornerstone-navy' : 'text-cornerstone-navy'}`}>
-              {language === 'fr' ? 'Suivi en Temps Réel' : 'Real-time Tracking'}
-            </span>
-          </Button>
+          <Link to="/order-tracking">
+            <Button 
+              variant="ghost"
+              className="flex items-center gap-2 hover:text-cornerstone-gold transition-colors"
+            >
+              <Clock className="h-5 w-5" />
+              <span className={`${scrolled ? 'text-cornerstone-marine' : 'text-cornerstone-marine'}`}>
+                {language === 'fr' ? 'Suivi en Temps Réel' : 'Real-time Tracking'}
+              </span>
+            </Button>
+          </Link>
           
           <button
             onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
-            className="px-3 py-1 bg-cornerstone-orange text-white rounded-md hover:bg-opacity-80 transition-colors"
+            className="px-3 py-1 bg-cornerstone-gold text-cornerstone-marine rounded-md hover:bg-opacity-80 transition-colors"
           >
             {language === 'fr' ? 'EN' : 'FR'}
           </button>
@@ -135,7 +137,7 @@ const Navbar: React.FC = () => {
             smooth={true} 
             offset={-70} 
             duration={500}
-            className="bg-cornerstone-red text-white px-6 py-2 rounded-lg hover:bg-opacity-90 transition-transform hover:scale-105 cursor-pointer"
+            className="bg-cornerstone-marine text-cornerstone-white px-6 py-2 rounded-lg hover:bg-opacity-90 transition-transform hover:scale-105 cursor-pointer"
           >
             {t('estimateProject')}
           </ScrollLink>
@@ -145,13 +147,13 @@ const Navbar: React.FC = () => {
         <div className="flex md:hidden items-center space-x-4">
           <button
             onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
-            className="px-3 py-1 bg-cornerstone-orange text-white rounded-md hover:bg-opacity-80 transition-colors"
+            className="px-3 py-1 bg-cornerstone-gold text-cornerstone-marine rounded-md hover:bg-opacity-80 transition-colors"
           >
             {language === 'fr' ? 'EN' : 'FR'}
           </button>
           
           <button onClick={toggleMenu} className={`${
-            scrolled ? 'text-cornerstone-navy' : 'text-cornerstone-navy'
+            scrolled ? 'text-cornerstone-marine' : 'text-cornerstone-marine'
           }`}>
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -160,7 +162,7 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu Dropdown */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white shadow-lg animate-slide-up">
+        <div className="md:hidden bg-cornerstone-white shadow-lg animate-slide-up">
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
             <ScrollLink 
               to="home" 
@@ -168,7 +170,7 @@ const Navbar: React.FC = () => {
               smooth={true} 
               offset={-70} 
               duration={500}
-              className="text-cornerstone-navy hover:text-cornerstone-red transition-colors py-2 cursor-pointer"
+              className="text-cornerstone-marine hover:text-cornerstone-gold transition-colors py-2 cursor-pointer"
               onClick={toggleMenu}
             >
               {t('home')}
@@ -179,7 +181,7 @@ const Navbar: React.FC = () => {
               smooth={true} 
               offset={-70} 
               duration={500}
-              className="text-cornerstone-navy hover:text-cornerstone-red transition-colors py-2 cursor-pointer"
+              className="text-cornerstone-marine hover:text-cornerstone-gold transition-colors py-2 cursor-pointer"
               onClick={toggleMenu}
             >
               {t('services')}
@@ -190,7 +192,7 @@ const Navbar: React.FC = () => {
               smooth={true} 
               offset={-70} 
               duration={500}
-              className="text-cornerstone-navy hover:text-cornerstone-red transition-colors py-2 cursor-pointer"
+              className="text-cornerstone-marine hover:text-cornerstone-gold transition-colors py-2 cursor-pointer"
               onClick={toggleMenu}
             >
               {t('faq')}
@@ -201,27 +203,28 @@ const Navbar: React.FC = () => {
               smooth={true} 
               offset={-70} 
               duration={500}
-              className="text-cornerstone-navy hover:text-cornerstone-red transition-colors py-2 cursor-pointer"
+              className="text-cornerstone-marine hover:text-cornerstone-gold transition-colors py-2 cursor-pointer"
               onClick={toggleMenu}
             >
               {t('contact')}
             </ScrollLink>
             
             <button 
-              className="flex items-center gap-2 text-cornerstone-navy hover:text-cornerstone-red transition-colors py-2"
-              onClick={() => handleExternalLink('https://cornerstonebrique.com/boutique')}
+              className="flex items-center gap-2 text-cornerstone-marine hover:text-cornerstone-gold transition-colors py-2"
+              onClick={() => handleExternalLink('https://www.cornerstonebrique.com/services')}
             >
               <ShoppingCart className="h-5 w-5" />
-              <span>{language === 'fr' ? 'Commande en ligne' : 'Online Order'}</span>
+              <span>{language === 'fr' ? 'Commander' : 'Order'}</span>
             </button>
             
-            <button 
-              className="flex items-center gap-2 text-cornerstone-navy hover:text-cornerstone-red transition-colors py-2"
-              onClick={() => handleExternalLink('https://cornerstonebrique.com/suivi')}
+            <Link 
+              to="/order-tracking"
+              className="flex items-center gap-2 text-cornerstone-marine hover:text-cornerstone-gold transition-colors py-2"
+              onClick={toggleMenu}
             >
               <Clock className="h-5 w-5" />
               <span>{language === 'fr' ? 'Suivi en Temps Réel' : 'Real-time Tracking'}</span>
-            </button>
+            </Link>
             
             <ScrollLink 
               to="estimate-project" 
@@ -229,7 +232,7 @@ const Navbar: React.FC = () => {
               smooth={true} 
               offset={-70} 
               duration={500}
-              className="bg-cornerstone-red text-white px-6 py-2 rounded-lg hover:bg-opacity-90 transition-colors w-full text-center cursor-pointer"
+              className="bg-cornerstone-marine text-cornerstone-white px-6 py-2 rounded-lg hover:bg-opacity-90 transition-colors w-full text-center cursor-pointer"
               onClick={toggleMenu}
             >
               {t('estimateProject')}
