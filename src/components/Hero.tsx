@@ -1,14 +1,30 @@
 
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import { ArrowRight, ArrowDown } from 'lucide-react';
+import { ArrowRight, ArrowDown, ExternalLink } from 'lucide-react';
 import { Link as ScrollLink } from 'react-scroll';
+import { Button } from '@/components/ui/button';
 
 const Hero: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+
+  const handleExternalLink = (url: string) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
 
   return (
     <section className="relative bg-gradient-to-br from-cornerstone-lightgray to-cornerstone-white py-16 md:py-24 overflow-hidden">
+      {/* Visit Cornerstone Button - positioned at the top */}
+      <div className="absolute top-4 right-4 md:top-6 md:right-6 z-10">
+        <Button
+          onClick={() => handleExternalLink('https://www.cornerstonebrique.com/')}
+          className="bg-cornerstone-orange hover:bg-cornerstone-orange/90 text-cornerstone-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 transition-transform hover:scale-105 shadow-md"
+        >
+          {language === 'fr' ? 'Visiter Cornerstone' : 'Visit Cornerstone'}
+          <ExternalLink className="h-4 w-4" />
+        </Button>
+      </div>
+
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-1/3 h-2 bg-cornerstone-marine"></div>
       <div className="absolute bottom-0 right-0 w-1/3 h-2 bg-cornerstone-gold"></div>
