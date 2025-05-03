@@ -104,7 +104,7 @@ const Navbar: React.FC = () => {
           <Button 
             variant="ghost"
             className="flex items-center gap-2 hover:text-cornerstone-gray transition-colors"
-            onClick={() => handleExternalLink('https://www.cornerstonebrique.com')}
+            onClick={() => handleExternalLink('https://www.cornerstonebrique.com/services')}
           >
             <ShoppingCart className="h-5 w-5" />
             <span className={`${scrolled ? 'text-cornerstone-orange' : 'text-cornerstone-orange'}`}>
@@ -211,7 +211,7 @@ const Navbar: React.FC = () => {
             
             <button 
               className="flex items-center gap-2 text-cornerstone-orange hover:text-cornerstone-gray transition-colors py-2"
-              onClick={() => handleExternalLink('https://www.cornerstonebrique.com')}
+              onClick={() => handleExternalLink('https://www.cornerstonebrique.com/services')}
             >
               <ShoppingCart className="h-5 w-5" />
               <span>{language === 'fr' ? 'Commander' : 'Order'}</span>

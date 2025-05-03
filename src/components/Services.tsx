@@ -1,10 +1,11 @@
 
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import { Calendar, ShoppingCart, Map, Settings } from 'lucide-react';
+import { Calendar, ShoppingCart, Map, Settings, ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const Services: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   
   const services = [
     {
@@ -29,6 +30,10 @@ const Services: React.FC = () => {
     }
   ];
 
+  const handleExternalLink = (url: string) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <section id="services" className="py-20 bg-cornerstone-white">
       <div className="container mx-auto px-4">
@@ -48,6 +53,16 @@ const Services: React.FC = () => {
               <p className="text-cornerstone-gray">{service.description}</p>
             </div>
           ))}
+        </div>
+        
+        <div className="mt-16 text-center">
+          <Button
+            onClick={() => handleExternalLink('https://www.cornerstonebrique.com/services')}
+            className="bg-cornerstone-orange hover:bg-cornerstone-orange/90 text-cornerstone-white px-8 py-6 rounded-lg text-lg font-bold flex items-center gap-2 mx-auto transition-transform hover:scale-105"
+          >
+            {language === 'fr' ? 'Commander maintenant' : 'Order Now'}
+            <ArrowRight className="h-5 w-5" />
+          </Button>
         </div>
       </div>
     </section>
