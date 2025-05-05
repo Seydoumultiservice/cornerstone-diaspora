@@ -22,7 +22,7 @@ const Services: React.FC = () => {
     {
       icon: <Map className="w-12 h-12 text-cornerstone-orange" />,
       title: t('delayedDelivery'),
-      description: t('delayedDeliveryDesc')
+      description: language === 'fr' ? "Stockage gratuit pour 3 mois." : "Free storage for 3 months."
     },
     {
       icon: <Settings className="w-12 h-12 text-cornerstone-orange" />,

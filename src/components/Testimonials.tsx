@@ -46,7 +46,7 @@ const Testimonials: React.FC = () => {
               key={index} 
               className="bg-cornerstone-white/5 backdrop-blur-sm p-6 rounded-lg border border-cornerstone-white/10 hover:border-cornerstone-orange/30 transition-colors"
             >
-              <p className="text-gray-200 mb-6 italic">"{testimonial.text}"</p>
+              <p className="text-black font-bold mb-6">{testimonial.text}</p>
               <div>
                 <p className="font-bold text-cornerstone-orange">{testimonial.name}</p>
                 <p className="text-gray-300">{testimonial.location}</p>
