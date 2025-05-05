@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { Menu, X, ShoppingCart, Clock } from 'lucide-react';
 import { Link as ScrollLink } from 'react-scroll';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Flags from './Flags';
 import { Button } from "@/components/ui/button";
 
@@ -11,6 +11,7 @@ const Navbar: React.FC = () => {
   const { language, setLanguage, t } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -34,6 +35,9 @@ const Navbar: React.FC = () => {
     };
   }, [scrolled]);
 
+  // Only render ScrollLink components on homepage
+  const isHomePage = location.pathname === '/';
+
   return (
     <header className={`py-4 sticky top-0 z-50 transition-all duration-300 ${
       scrolled 
@@ -42,64 +46,74 @@ const Navbar: React.FC = () => {
     }`}>
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center gap-4">
-          <a href="/" className={`text-2xl font-playfair font-bold transition-colors ${
+          <Link to="/" className={`text-2xl font-playfair font-bold transition-colors ${
             scrolled ? 'text-cornerstone-orange' : 'text-cornerstone-orange'
           }`}>
             <span className="text-cornerstone-orange">Cornerstone</span> Briques
-          </a>
+          </Link>
           <Flags />
         </div>
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center space-x-6">
-          <ScrollLink 
-            to="home" 
-            spy={true} 
-            smooth={true} 
-            offset={-70} 
-            duration={500}
-            className={`hover:text-cornerstone-gray transition-colors cursor-pointer ${
+          {isHomePage ? (
+            <>
+              <ScrollLink 
+                to="home" 
+                spy={true} 
+                smooth={true} 
+                offset={-70} 
+                duration={500}
+                className={`hover:text-cornerstone-gray transition-colors cursor-pointer ${
+                  scrolled ? 'text-cornerstone-orange' : 'text-cornerstone-orange'
+                }`}
+              >
+                {t('home')}
+              </ScrollLink>
+              <ScrollLink 
+                to="services" 
+                spy={true} 
+                smooth={true} 
+                offset={-70} 
+                duration={500}
+                className={`hover:text-cornerstone-gray transition-colors cursor-pointer ${
+                  scrolled ? 'text-cornerstone-orange' : 'text-cornerstone-orange'
+                }`}
+              >
+                {t('services')}
+              </ScrollLink>
+              <ScrollLink 
+                to="faq" 
+                spy={true} 
+                smooth={true} 
+                offset={-70} 
+                duration={500}
+                className={`hover:text-cornerstone-gray transition-colors cursor-pointer ${
+                  scrolled ? 'text-cornerstone-orange' : 'text-cornerstone-orange'
+                }`}
+              >
+                {t('faq')}
+              </ScrollLink>
+              <ScrollLink 
+                to="contact" 
+                spy={true} 
+                smooth={true} 
+                offset={-70} 
+                duration={500}
+                className={`hover:text-cornerstone-gray transition-colors cursor-pointer ${
+                  scrolled ? 'text-cornerstone-orange' : 'text-cornerstone-orange'
+                }`}
+              >
+                {t('contact')}
+              </ScrollLink>
+            </>
+          ) : (
+            <Link to="/" className={`hover:text-cornerstone-gray transition-colors ${
               scrolled ? 'text-cornerstone-orange' : 'text-cornerstone-orange'
-            }`}
-          >
-            {t('home')}
-          </ScrollLink>
-          <ScrollLink 
-            to="services" 
-            spy={true} 
-            smooth={true} 
-            offset={-70} 
-            duration={500}
-            className={`hover:text-cornerstone-gray transition-colors cursor-pointer ${
-              scrolled ? 'text-cornerstone-orange' : 'text-cornerstone-orange'
-            }`}
-          >
-            {t('services')}
-          </ScrollLink>
-          <ScrollLink 
-            to="faq" 
-            spy={true} 
-            smooth={true} 
-            offset={-70} 
-            duration={500}
-            className={`hover:text-cornerstone-gray transition-colors cursor-pointer ${
-              scrolled ? 'text-cornerstone-orange' : 'text-cornerstone-orange'
-            }`}
-          >
-            {t('faq')}
-          </ScrollLink>
-          <ScrollLink 
-            to="contact" 
-            spy={true} 
-            smooth={true} 
-            offset={-70} 
-            duration={500}
-            className={`hover:text-cornerstone-gray transition-colors cursor-pointer ${
-              scrolled ? 'text-cornerstone-orange' : 'text-cornerstone-orange'
-            }`}
-          >
-            {t('contact')}
-          </ScrollLink>
+            }`}>
+              {t('home')}
+            </Link>
+          )}
           
           <Button 
             variant="ghost"
@@ -131,16 +145,18 @@ const Navbar: React.FC = () => {
             {language === 'fr' ? 'EN' : 'FR'}
           </button>
           
-          <ScrollLink 
-            to="estimate-project" 
-            spy={true} 
-            smooth={true} 
-            offset={-70} 
-            duration={500}
-            className="bg-cornerstone-orange text-cornerstone-white px-6 py-2 rounded-lg hover:bg-opacity-90 transition-transform hover:scale-105 cursor-pointer"
-          >
-            {t('estimateProject')}
-          </ScrollLink>
+          {isHomePage && (
+            <ScrollLink 
+              to="estimate-project" 
+              spy={true} 
+              smooth={true} 
+              offset={-70} 
+              duration={500}
+              className="bg-cornerstone-orange text-cornerstone-white px-6 py-2 rounded-lg hover:bg-opacity-90 transition-transform hover:scale-105 cursor-pointer"
+            >
+              {t('estimateProject')}
+            </ScrollLink>
+          )}
         </nav>
 
         {/* Mobile Menu Button */}
@@ -164,50 +180,62 @@ const Navbar: React.FC = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-cornerstone-white shadow-lg animate-slide-up">
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-            <ScrollLink 
-              to="home" 
-              spy={true} 
-              smooth={true} 
-              offset={-70} 
-              duration={500}
-              className="text-cornerstone-orange hover:text-cornerstone-gray transition-colors py-2 cursor-pointer"
-              onClick={toggleMenu}
-            >
-              {t('home')}
-            </ScrollLink>
-            <ScrollLink 
-              to="services" 
-              spy={true} 
-              smooth={true} 
-              offset={-70} 
-              duration={500}
-              className="text-cornerstone-orange hover:text-cornerstone-gray transition-colors py-2 cursor-pointer"
-              onClick={toggleMenu}
-            >
-              {t('services')}
-            </ScrollLink>
-            <ScrollLink 
-              to="faq" 
-              spy={true} 
-              smooth={true} 
-              offset={-70} 
-              duration={500}
-              className="text-cornerstone-orange hover:text-cornerstone-gray transition-colors py-2 cursor-pointer"
-              onClick={toggleMenu}
-            >
-              {t('faq')}
-            </ScrollLink>
-            <ScrollLink 
-              to="contact" 
-              spy={true} 
-              smooth={true} 
-              offset={-70} 
-              duration={500}
-              className="text-cornerstone-orange hover:text-cornerstone-gray transition-colors py-2 cursor-pointer"
-              onClick={toggleMenu}
-            >
-              {t('contact')}
-            </ScrollLink>
+            {isHomePage ? (
+              <>
+                <ScrollLink 
+                  to="home" 
+                  spy={true} 
+                  smooth={true} 
+                  offset={-70} 
+                  duration={500}
+                  className="text-cornerstone-orange hover:text-cornerstone-gray transition-colors py-2 cursor-pointer"
+                  onClick={toggleMenu}
+                >
+                  {t('home')}
+                </ScrollLink>
+                <ScrollLink 
+                  to="services" 
+                  spy={true} 
+                  smooth={true} 
+                  offset={-70} 
+                  duration={500}
+                  className="text-cornerstone-orange hover:text-cornerstone-gray transition-colors py-2 cursor-pointer"
+                  onClick={toggleMenu}
+                >
+                  {t('services')}
+                </ScrollLink>
+                <ScrollLink 
+                  to="faq" 
+                  spy={true} 
+                  smooth={true} 
+                  offset={-70} 
+                  duration={500}
+                  className="text-cornerstone-orange hover:text-cornerstone-gray transition-colors py-2 cursor-pointer"
+                  onClick={toggleMenu}
+                >
+                  {t('faq')}
+                </ScrollLink>
+                <ScrollLink 
+                  to="contact" 
+                  spy={true} 
+                  smooth={true} 
+                  offset={-70} 
+                  duration={500}
+                  className="text-cornerstone-orange hover:text-cornerstone-gray transition-colors py-2 cursor-pointer"
+                  onClick={toggleMenu}
+                >
+                  {t('contact')}
+                </ScrollLink>
+              </>
+            ) : (
+              <Link 
+                to="/"
+                className="text-cornerstone-orange hover:text-cornerstone-gray transition-colors py-2"
+                onClick={toggleMenu}
+              >
+                {t('home')}
+              </Link>
+            )}
             
             <button 
               className="flex items-center gap-2 text-cornerstone-orange hover:text-cornerstone-gray transition-colors py-2"
@@ -226,17 +254,19 @@ const Navbar: React.FC = () => {
               <span>{language === 'fr' ? 'Suivi en Temps Réel' : 'Real-time Tracking'}</span>
             </Link>
             
-            <ScrollLink 
-              to="estimate-project" 
-              spy={true} 
-              smooth={true} 
-              offset={-70} 
-              duration={500}
-              className="bg-cornerstone-orange text-cornerstone-white px-6 py-2 rounded-lg hover:bg-opacity-90 transition-colors w-full text-center cursor-pointer"
-              onClick={toggleMenu}
-            >
-              {t('estimateProject')}
-            </ScrollLink>
+            {isHomePage && (
+              <ScrollLink 
+                to="estimate-project" 
+                spy={true} 
+                smooth={true} 
+                offset={-70} 
+                duration={500}
+                className="bg-cornerstone-orange text-cornerstone-white px-6 py-2 rounded-lg hover:bg-opacity-90 transition-colors w-full text-center cursor-pointer"
+                onClick={toggleMenu}
+              >
+                {t('estimateProject')}
+              </ScrollLink>
+            )}
           </div>
         </div>
       )}

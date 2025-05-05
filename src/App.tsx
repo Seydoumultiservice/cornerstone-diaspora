@@ -17,25 +17,23 @@ const queryClient = new QueryClient();
 
 const App: React.FC = () => {
   return (
-    <React.StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <LanguageProvider>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <LanguageProvider>
+          <BrowserRouter>
             <Toaster />
             <Sonner />
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/order-tracking" element={<OrderTracking />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-              <ChatBot />
-              <ExitIntentPopup />
-            </BrowserRouter>
-          </LanguageProvider>
-        </TooltipProvider>
-      </QueryClientProvider>
-    </React.StrictMode>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/order-tracking" element={<OrderTracking />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            <ChatBot />
+            <ExitIntentPopup />
+          </BrowserRouter>
+        </LanguageProvider>
+      </TooltipProvider>
+    </QueryClientProvider>
   );
 };
 
