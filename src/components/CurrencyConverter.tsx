@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
 // Define the currency type for better type safety
-type CurrencyCode = 'EUR' | 'USD' | 'XOF';
+type CurrencyCode = 'EUR' | 'USD' | 'XOF' | 'GBP' | 'CAD' | 'JPY' | 'DKK';
 
 // Define the rates structure type
 type RatesType = {
@@ -19,11 +19,71 @@ const CurrencyConverter: React.FC = () => {
   const [toCurrency, setToCurrency] = useState<CurrencyCode>('XOF');
   const [result, setResult] = useState<string | null>(null);
 
-  // Simplified conversion rates (as of April 2023)
+  // Updated conversion rates (as of May 2024)
   const rates: RatesType = {
-    EUR: { XOF: 655.957, USD: 1.08, EUR: 1 },
-    USD: { XOF: 607.37, EUR: 0.93, USD: 1 },
-    XOF: { EUR: 0.00152, USD: 0.00165, XOF: 1 }
+    EUR: { 
+      XOF: 655.957, 
+      USD: 1.08, 
+      EUR: 1,
+      GBP: 0.85,
+      CAD: 1.46,
+      JPY: 167.39,
+      DKK: 7.46
+    },
+    USD: { 
+      XOF: 607.37, 
+      EUR: 0.93, 
+      USD: 1,
+      GBP: 0.79,
+      CAD: 1.36,
+      JPY: 155.18,
+      DKK: 6.91
+    },
+    XOF: { 
+      EUR: 0.00152, 
+      USD: 0.00165, 
+      XOF: 1,
+      GBP: 0.00131,
+      CAD: 0.00223,
+      JPY: 0.25,
+      DKK: 0.0113
+    },
+    GBP: {
+      XOF: 766.12,
+      EUR: 1.17,
+      USD: 1.27,
+      GBP: 1,
+      CAD: 1.71,
+      JPY: 195.64,
+      DKK: 8.72
+    },
+    CAD: {
+      XOF: 448.44,
+      EUR: 0.68,
+      USD: 0.74,
+      GBP: 0.58,
+      CAD: 1,
+      JPY: 114.51,
+      DKK: 5.11
+    },
+    JPY: {
+      XOF: 3.92,
+      EUR: 0.006,
+      USD: 0.0064,
+      GBP: 0.0051,
+      CAD: 0.0087,
+      JPY: 1,
+      DKK: 0.045
+    },
+    DKK: {
+      XOF: 87.93,
+      EUR: 0.134,
+      USD: 0.145,
+      GBP: 0.115,
+      CAD: 0.196,
+      JPY: 22.44,
+      DKK: 1
+    }
   };
 
   const handleConvert = () => {
@@ -62,9 +122,13 @@ const CurrencyConverter: React.FC = () => {
                   onChange={(e) => setFromCurrency(e.target.value as CurrencyCode)}
                   className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cornerstone-gold"
                 >
+                  <option value="XOF">XOF (FCFA)</option>
                   <option value="EUR">EUR (€)</option>
                   <option value="USD">USD ($)</option>
-                  <option value="XOF">XOF (FCFA)</option>
+                  <option value="GBP">GBP (£)</option>
+                  <option value="CAD">CAD ($)</option>
+                  <option value="JPY">JPY (¥)</option>
+                  <option value="DKK">DKK (kr)</option>
                 </select>
               </div>
               
@@ -78,6 +142,10 @@ const CurrencyConverter: React.FC = () => {
                   <option value="XOF">XOF (FCFA)</option>
                   <option value="EUR">EUR (€)</option>
                   <option value="USD">USD ($)</option>
+                  <option value="GBP">GBP (£)</option>
+                  <option value="CAD">CAD ($)</option>
+                  <option value="JPY">JPY (¥)</option>
+                  <option value="DKK">DKK (kr)</option>
                 </select>
               </div>
             </div>

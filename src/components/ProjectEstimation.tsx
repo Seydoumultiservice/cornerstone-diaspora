@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { FileUp, Send } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import MaterialCalculator from './MaterialCalculator';
+import BrickCalculator from './BrickCalculator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 type ProjectFormValues = {
@@ -91,8 +91,8 @@ const ProjectEstimation = () => {
           </h2>
           <p className="section-subtitle">
             {language === 'fr' 
-              ? 'Calculez les matériaux nécessaires ou demandez une estimation personnalisée'
-              : 'Calculate required materials or request a custom estimation'}
+              ? 'Calculez les briques nécessaires ou demandez une estimation personnalisée'
+              : 'Calculate required bricks or request a custom estimation'}
           </p>
         </div>
         
@@ -104,7 +104,7 @@ const ProjectEstimation = () => {
         >
           <TabsList className="grid grid-cols-2 mb-6">
             <TabsTrigger value="calculator">
-              {language === 'fr' ? 'Calculateur de Matériaux' : 'Materials Calculator'}
+              {language === 'fr' ? 'Calculateur de Brique' : 'Brick Calculator'}
             </TabsTrigger>
             <TabsTrigger value="custom-request">
               {language === 'fr' ? 'Demande Personnalisée' : 'Custom Request'}
@@ -112,7 +112,7 @@ const ProjectEstimation = () => {
           </TabsList>
           
           <TabsContent value="calculator" className="mt-6 focus-visible:outline-none">
-            <MaterialCalculator />
+            <BrickCalculator />
           </TabsContent>
           
           <TabsContent value="custom-request" className="mt-6 focus-visible:outline-none">
