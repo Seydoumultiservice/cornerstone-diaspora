@@ -38,6 +38,25 @@ const Navbar: React.FC = () => {
   // Only render ScrollLink components on homepage
   const isHomePage = location.pathname === '/';
 
+  const toggleLanguage = () => {
+    if (language === 'fr') {
+      setLanguage('en');
+    } else if (language === 'en') {
+      setLanguage('ee');
+    } else {
+      setLanguage('fr');
+    }
+  };
+
+  const getLanguageLabel = () => {
+    switch (language) {
+      case 'fr': return 'EN';
+      case 'en': return 'EE';
+      case 'ee': return 'FR';
+      default: return 'FR';
+    }
+  };
+
   return (
     <header className={`py-4 sticky top-0 z-50 transition-all duration-300 ${
       scrolled 
@@ -46,7 +65,7 @@ const Navbar: React.FC = () => {
     }`}>
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center gap-4">
-          <Link to="/" className={`text-2xl font-playfair font-bold transition-colors ${
+          <Link to="/" className={`text-xl sm:text-2xl font-playfair font-bold transition-colors ${
             scrolled ? 'text-cornerstone-orange' : 'text-cornerstone-orange'
           }`}>
             <span className="text-cornerstone-orange">Cornerstone</span> Briques
@@ -55,7 +74,7 @@ const Navbar: React.FC = () => {
         </div>
 
         {/* Desktop Menu */}
-        <nav className="hidden md:flex items-center space-x-6">
+        <nav className="hidden md:flex items-center space-x-4 lg:space-x-6">
           {isHomePage ? (
             <>
               <ScrollLink 
@@ -122,7 +141,7 @@ const Navbar: React.FC = () => {
           >
             <ShoppingCart className="h-5 w-5" />
             <span className={`${scrolled ? 'text-cornerstone-orange' : 'text-cornerstone-orange'}`}>
-              {language === 'fr' ? 'Commander' : 'Order'}
+              {t('onlineOrdering')}
             </span>
           </Button>
           
@@ -133,16 +152,16 @@ const Navbar: React.FC = () => {
             >
               <Clock className="h-5 w-5" />
               <span className={`${scrolled ? 'text-cornerstone-orange' : 'text-cornerstone-orange'}`}>
-                {language === 'fr' ? 'Suivi en Temps Réel' : 'Real-time Tracking'}
+                {t('realTimeTracking')}
               </span>
             </Button>
           </Link>
           
           <button
-            onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
+            onClick={toggleLanguage}
             className="px-3 py-1 bg-cornerstone-orange text-cornerstone-white rounded-md hover:bg-opacity-80 transition-colors"
           >
-            {language === 'fr' ? 'EN' : 'FR'}
+            {getLanguageLabel()}
           </button>
           
           {isHomePage && (
@@ -152,7 +171,7 @@ const Navbar: React.FC = () => {
               smooth={true} 
               offset={-70} 
               duration={500}
-              className="bg-cornerstone-orange text-cornerstone-white px-6 py-2 rounded-lg hover:bg-opacity-90 transition-transform hover:scale-105 cursor-pointer"
+              className="bg-cornerstone-orange text-cornerstone-white px-4 lg:px-6 py-2 rounded-lg hover:bg-opacity-90 transition-transform hover:scale-105 cursor-pointer text-sm lg:text-base whitespace-nowrap"
             >
               {t('estimateProject')}
             </ScrollLink>
@@ -162,10 +181,10 @@ const Navbar: React.FC = () => {
         {/* Mobile Menu Button */}
         <div className="flex md:hidden items-center space-x-4">
           <button
-            onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
+            onClick={toggleLanguage}
             className="px-3 py-1 bg-cornerstone-orange text-cornerstone-white rounded-md hover:bg-opacity-80 transition-colors"
           >
-            {language === 'fr' ? 'EN' : 'FR'}
+            {getLanguageLabel()}
           </button>
           
           <button onClick={toggleMenu} className={`${
@@ -242,7 +261,7 @@ const Navbar: React.FC = () => {
               onClick={() => handleExternalLink('https://www.cornerstonebrique.com/services')}
             >
               <ShoppingCart className="h-5 w-5" />
-              <span>{language === 'fr' ? 'Commander' : 'Order'}</span>
+              <span>{t('onlineOrdering')}</span>
             </button>
             
             <Link 
@@ -251,7 +270,7 @@ const Navbar: React.FC = () => {
               onClick={toggleMenu}
             >
               <Clock className="h-5 w-5" />
-              <span>{language === 'fr' ? 'Suivi en Temps Réel' : 'Real-time Tracking'}</span>
+              <span>{t('realTimeTracking')}</span>
             </Link>
             
             {isHomePage && (
